@@ -1,0 +1,52 @@
+name: test
+
+on:
+    pull_request:
+    push:
+        branches: [ master ]
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            matrix:
+                php:
+                    - '7.4'
+                    - '8.0'
+                    - '8.1'
+                    - '8.2'
+                minimum_versions: [false]
+                coverage: ['none']
+                include:
+                    - description: 'Minimum version'
+                      php: '7.4'
+                      minimum_versions: true
+
+        name: PHP ${{ matrix.php }} ${{ matrix.description }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - uses: actions/cache@v3
+              with:
+                  path: ~/.composer/cache/files
+                  key: ${{ matrix.php }}
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  coverage: ${{ matrix.coverage }}
+
+            - name: Install dependencies
+              run: composer install
+              if: matrix.minimum_versions == false
+
+            - name: Install dependencies lower
+              run: composer update --no-interaction --prefer-lowest
+              if: matrix.minimum_versions == true
+
+            - name: Run PHPUnit tests
+              run: vendor/bin/phpunit
+              if: matrix.coverage == 'none'

@@ -1,0 +1,12 @@
+vendor/
+composer.lock
+composer.phar
+.DS_Store
+testing/
+nbproject/private/
+test/log
+build
+.idea
+coverage.xml
+.phpunit.*.cache
+.phpunit.cache
