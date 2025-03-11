@@ -1,6 +1,6 @@
 <?php
 
-namespace Bahuma\OAuth2\Client\Tests\Provider;
+namespace rkl110\OAuth2\Client\Tests\Provider;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Utils;
@@ -9,14 +9,14 @@ use League\OAuth2\Client\Token\AccessToken;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use Bahuma\OAuth2\Client\Provider\Nextcloud;
+use rkl110\OAuth2\Client\Provider\Kanidm;
 use Ramsey\Uuid\Uuid;
-use Bahuma\OAuth2\Client\Provider\NextcloudResourceOwner;
+use rkl110\OAuth2\Client\Provider\KanidmResourceOwner;
 
-class NextcloudTest extends TestCase
+class KanidmTest extends TestCase
 {
     /**
-     * @var Nextcloud
+     * @var Kanidm
      */
     protected $provider;
 
@@ -27,7 +27,7 @@ class NextcloudTest extends TestCase
 
         parent::setUp();
 
-        $this->provider = new Nextcloud([
+        $this->provider = new Kanidm([
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'mock_redirect_uri',

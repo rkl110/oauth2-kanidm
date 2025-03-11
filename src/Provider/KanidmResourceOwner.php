@@ -1,6 +1,6 @@
 <?php
 
-namespace Bahuma\OAuth2\Client\Provider;
+namespace rkl110\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Tool\ArrayAccessorTrait;
@@ -8,7 +8,7 @@ use League\OAuth2\Client\Tool\ArrayAccessorTrait;
 /**
  *  Gets https://lukasreschke.github.io/OpenCloudMeshSpecification/#get-a-user
  */
-class NextcloudResourceOwner implements ResourceOwnerInterface
+class KanidmResourceOwner implements ResourceOwnerInterface
 {
     use ArrayAccessorTrait;
 
@@ -37,7 +37,7 @@ class NextcloudResourceOwner implements ResourceOwnerInterface
     public function getId()
     {
 
-        return $this->getValueByKey($this->response, 'ocs.data.id');
+        return $this->getValueByKey($this->response, 'sub');
     }
 
   /**
@@ -47,7 +47,7 @@ class NextcloudResourceOwner implements ResourceOwnerInterface
    */
     public function getName()
     {
-        return $this->getValueByKey($this->response, 'ocs.data.display-name');
+        return $this->getValueByKey($this->response, 'name');
     }
 
   /**
@@ -57,7 +57,7 @@ class NextcloudResourceOwner implements ResourceOwnerInterface
    */
     public function getEmail()
     {
-        return $this->getValueByKey($this->response, 'ocs.data.email');
+        return $this->getValueByKey($this->response, 'email');
     }
 
   /**
@@ -67,7 +67,7 @@ class NextcloudResourceOwner implements ResourceOwnerInterface
    */
     public function getGroups()
     {
-        return $this->getValueByKey($this->response, 'ocs.data.groups');
+        return $this->getValueByKey($this->response, 'groups');
     }
 
   /**
@@ -77,6 +77,6 @@ class NextcloudResourceOwner implements ResourceOwnerInterface
    */
     public function toArray()
     {
-        return $this->getValueByKey($this->response, 'ocs.data');
+        return $this->response;
     }
 }

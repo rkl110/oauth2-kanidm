@@ -1,6 +1,6 @@
 {
-    "name": "bahuma/oauth2-nextcloud",
-    "description": "Nextcloud OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
+    "name": "bahuma/oauth2-kanidm",
+    "description": "Kanidm OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "require": {
         "league/oauth2-client": "^2.0",
         "php": "^7.4||^8.0"
@@ -12,7 +12,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Bahuma\\OAuth2\\Client\\Test\\": "test/src/"
+            "rkl110\\OAuth2\\Client\\Test\\": "test/src/"
         }
     },
     "license": "MIT",
@@ -30,7 +30,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Bahuma\\OAuth2\\Client\\": "src/"
+            "rkl110\\OAuth2\\Client\\": "src/"
         }
     },
     "scripts": {

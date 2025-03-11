@@ -1,6 +1,6 @@
 <?php
 
-namespace Bahuma\OAuth2\Client\Provider;
+namespace rkl110\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
@@ -8,35 +8,51 @@ use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Tool\BearerAuthorizationTrait;
 use Psr\Http\Message\ResponseInterface;
 
-class Nextcloud extends AbstractProvider
+class Kanidm extends AbstractProvider
 {
     use BearerAuthorizationTrait;
 
-  /**
-   * @var string Base URL of the nextcloud instance (not including trailing slash).
-   */
-    protected $nextcloudUrl = '';
+    protected $issuer = '';
+    protected $kanidmBaseUrl = '';
+
+    public function __construct(array $options = [], array $collaborators = [])
+    {
+        parent::__construct($options, $collaborators);
+        $this->kanidmBaseUrl = $this->getProtocolAndDomain($this->issuer);
+    }
+
+    private function getProtocolAndDomain($url)
+    {
+        $parsedUrl = parse_url($url);
+        return $parsedUrl['scheme'] . '://' . $parsedUrl['host'];
+    }
 
     public function getBaseAuthorizationUrl()
     {
-        return $this->nextcloudUrl . '/index.php/apps/oauth2/authorize';
+        return $this->kanidmBaseUrl . '/ui/oauth2';
     }
 
     public function getBaseAccessTokenUrl(array $params)
     {
-        return $this->nextcloudUrl . '/index.php/apps/oauth2/api/v1/token';
+        return $this->kanidmBaseUrl . '/oauth2/token';
     }
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        return $this->nextcloudUrl . '/ocs/v2.php/cloud/user?format=json';
+        return $this->issuer . '/userinfo';
     }
 
     protected function getDefaultScopes()
     {
         return [
-
+            'openid',
+            'email',
+            'profile'
         ];
+    }
+    protected function getScopeSeparator()
+    {
+        return ' ';
     }
 
     protected function checkResponse(ResponseInterface $response, $data)
@@ -60,6 +76,6 @@ class Nextcloud extends AbstractProvider
 
     protected function createResourceOwner(array $response, AccessToken $token)
     {
-        return new NextcloudResourceOwner($response);
+        return new KanidmResourceOwner($response);
     }
 }

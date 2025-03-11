@@ -1,6 +1,6 @@
-# Nextcloud Provider for OAuth 2.0 Client
+# Kanidm Provider for OAuth 2.0 Client
 
-This package provides Nextcloud OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
+This package provides Kanidm OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
 This package is compliant with [PSR-1][], [PSR-2][] and [PSR-4][]. If you notice compliance oversights, please send
 a patch via pull request.
@@ -15,20 +15,20 @@ The following versions of PHP are supported.
 
 * From PHP 7.4 to PHP 8.2
 
-To use this package, it will be necessary to have a Nextcloud client ID and client
-secret. These are referred to as `{nextcloud-client-id}` and `{nextcloud-client-secret}`
+To use this package, it will be necessary to have a Kanidm client ID and client
+secret. These are referred to as `{kanidm-client-id}` and `{kanidm-client-secret}`
 in the documentation.
 
-Please follow the [Nextcloud instructions][oauth-setup] to create the required credentials.
+Please follow the [Kanidm instructions][oauth-setup] to create the required credentials.
 
-[oauth-setup]: https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/oauth2.html#add-an-oauth2-application
+[oauth-setup]: https://docs.kanidm.com/server/latest/admin_manual/configuration_server/oauth2.html#add-an-oauth2-application
 
 ## Installation
 
 To install, use composer:
 
 ```sh
-composer require bahuma/oauth2-nextcloud
+composer require bahuma/oauth2-kanidm
 ```
 
 ## Usage
@@ -36,15 +36,15 @@ composer require bahuma/oauth2-nextcloud
 ### Authorization Code Flow
 
 ```php
-use Bahuma\OAuth2\Client\Provider\Nextcloud;
+use rkl110\OAuth2\Client\Provider\Kanidm;
 
 session_start();
 
-$provider = new Nextcloud([
-    'clientId'     => '{nextcloud-client-id}',
-    'clientSecret' => '{nextcloud-client-secret}',
+$provider = new Kanidm([
+    'clientId'     => '{kanidm-client-id}',
+    'clientSecret' => '{kanidm-client-secret}',
     'redirectUri'  => 'https://example.com/callback-url',
-    'nextcloudUrl' => 'https://cloud.example.com', // Base URL of your nextcloud instance.
+    'kanidmUrl' => 'https://cloud.example.com', // Base URL of your kanidm instance.
 ]);
 
 if (!empty($_GET['error'])) {
@@ -77,7 +77,7 @@ if (!empty($_GET['error'])) {
     try {
 
         // We got an access token, let's now get the owner details
-        /** @var \Bahuma\OAuth2\Client\Provider\NextcloudResourceOwner $ownerDetails */
+        /** @var \rkl110\OAuth2\Client\Provider\KanidmResourceOwner $ownerDetails */
         $ownerDetails = $provider->getResourceOwner($token);
 
         // Use these details to create a new profile
@@ -115,14 +115,14 @@ $refreshToken = $token->getRefreshToken();
 Now you have everything you need to refresh an access token using a refresh token:
 
 ```php
-use Bahuma\OAuth2\Client\Provider\Nextcloud;
+use rkl110\OAuth2\Client\Provider\Kanidm;
 use League\OAuth2\Client\Grant\RefreshToken;
 
-$provider = new Nextcloud([
+$provider = new Kanidm([
     'clientId'     => '{google-client-id}',
     'clientSecret' => '{google-client-secret}',
     'redirectUri'  => 'https://example.com/callback-url',
-    'nextcloudUrl' => 'https://cloud.example.com', // Base URL of your nextcloud instance.
+    'kanidmUrl' => 'https://cloud.example.com', // Base URL of your kanidm instance.
 ]);
 
 $grant = new RefreshToken();
@@ -131,7 +131,7 @@ $token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 
 ## Scopes
 
-Nextcloud OAuth2 implementation currently does not support scoped access. This means that every token has full access 
+Kanidm OAuth2 implementation currently does not support scoped access. This means that every token has full access 
 to the complete account including read and write permission to the stored files. It is essential to store the OAuth2 
 tokens in a safe way!
 
@@ -154,9 +154,9 @@ composer check
 
 - [Max Bachhuber](https://github.com/bahuma20)
 - [Aleix Quintana Alsius](https://github.com/aleixq) 
-- [All Contributors](https://github.com/bahuma/oauth2-nextcloud/contributors)
+- [All Contributors](https://github.com/bahuma/oauth2-kanidm/contributors)
 
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/thephpleague/oauth2-nextcloud/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/thephpleague/oauth2-kanidm/blob/master/LICENSE) for more information.
