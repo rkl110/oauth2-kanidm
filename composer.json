@@ -1,5 +1,5 @@
 {
-    "name": "bahuma/oauth2-kanidm",
+    "name": "rkl110/oauth2-kanidm",
     "description": "Kanidm OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "require": {
         "league/oauth2-client": "^2.0",
@@ -18,15 +18,10 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Max Bachhuber",
-            "email": "max.bachhuber@bahuma.io",
-            "homepage": "https://bahuma.io"
-        },
-        {
-            "name": "Aleix Quintana Alsius",
-            "email": "kinta@communia.org",
-            "homepage": "https://communia.org"
-        }        
+            "name": "Robert",
+            "email": "",
+            "homepage": ""
+        }
     ],
     "autoload": {
         "psr-4": {

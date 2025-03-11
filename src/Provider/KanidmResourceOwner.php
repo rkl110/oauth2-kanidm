@@ -5,9 +5,6 @@ namespace rkl110\OAuth2\Client\Provider;
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 use League\OAuth2\Client\Tool\ArrayAccessorTrait;
 
-/**
- *  Gets https://lukasreschke.github.io/OpenCloudMeshSpecification/#get-a-user
- */
 class KanidmResourceOwner implements ResourceOwnerInterface
 {
     use ArrayAccessorTrait;
