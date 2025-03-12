@@ -1,3 +1,9 @@
+# Read Me!
+
+> **Important!** Because I dont know how to work on php this is just a simple try and error.
+
+I forked the repository from [bahuma20/oauth2-nextcloud](https://github.com/bahuma20/oauth2-nextcloud) and now I'm on my way to complete the rest to work for Kanidm.
+
 # Kanidm Provider for OAuth 2.0 Client
 
 This package provides Kanidm OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
@@ -19,16 +25,12 @@ To use this package, it will be necessary to have a Kanidm client ID and client
 secret. These are referred to as `{kanidm-client-id}` and `{kanidm-client-secret}`
 in the documentation.
 
-Please follow the [Kanidm instructions][oauth-setup] to create the required credentials.
-
-[oauth-setup]: https://docs.kanidm.com/server/latest/admin_manual/configuration_server/oauth2.html#add-an-oauth2-application
-
 ## Installation
 
 To install, use composer:
 
 ```sh
-composer require bahuma/oauth2-kanidm
+composer require rkl110/oauth2-kanidm
 ```
 
 ## Usage
@@ -43,8 +45,7 @@ session_start();
 $provider = new Kanidm([
     'clientId'     => '{kanidm-client-id}',
     'clientSecret' => '{kanidm-client-secret}',
-    'redirectUri'  => 'https://example.com/callback-url',
-    'kanidmUrl' => 'https://cloud.example.com', // Base URL of your kanidm instance.
+    'kanidmUrl' => 'https://idm.example.com', // Base URL of your kanidm instance.
 ]);
 
 if (!empty($_GET['error'])) {
@@ -121,8 +122,7 @@ use League\OAuth2\Client\Grant\RefreshToken;
 $provider = new Kanidm([
     'clientId'     => '{google-client-id}',
     'clientSecret' => '{google-client-secret}',
-    'redirectUri'  => 'https://example.com/callback-url',
-    'kanidmUrl' => 'https://cloud.example.com', // Base URL of your kanidm instance.
+    'kanidmUrl' => 'https://idm.example.com', // Base URL of your kanidm instance.
 ]);
 
 $grant = new RefreshToken();
@@ -130,10 +130,6 @@ $token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
 ```
 
 ## Scopes
-
-Kanidm OAuth2 implementation currently does not support scoped access. This means that every token has full access 
-to the complete account including read and write permission to the stored files. It is essential to store the OAuth2 
-tokens in a safe way!
 
 ## Testing
 
