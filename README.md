@@ -38,11 +38,11 @@ composer require rkl110/oauth2-kanidm
 ### Authorization Code Flow
 
 ```php
-use rkl110\OAuth2\Client\Provider\Kanidm;
+use rkl110\OAuth2\Client\Provider\KanidmProvider;
 
 session_start();
 
-$provider = new Kanidm([
+$provider = new KanidmProvider([
     'clientId'     => '{kanidm-client-id}',
     'clientSecret' => '{kanidm-client-secret}',
     'kanidmUrl' => 'https://idm.example.com', // Base URL of your kanidm instance.
@@ -116,10 +116,10 @@ $refreshToken = $token->getRefreshToken();
 Now you have everything you need to refresh an access token using a refresh token:
 
 ```php
-use rkl110\OAuth2\Client\Provider\Kanidm;
+use rkl110\OAuth2\Client\Provider\KanidmProvider;
 use League\OAuth2\Client\Grant\RefreshToken;
 
-$provider = new Kanidm([
+$provider = new KanidmProvider([
     'clientId'     => '{google-client-id}',
     'clientSecret' => '{google-client-secret}',
     'kanidmUrl' => 'https://idm.example.com', // Base URL of your kanidm instance.
